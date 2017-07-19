@@ -1617,9 +1617,9 @@
     </highlighting>
   </searchComponent>
 
-   <searchComponent class="solr.SuggestComponent" name="suggest">
+  <searchComponent class="solr.SuggestComponent" name="suggest">
     <lst name="suggester">
-      <str name="name">analyzingInfixSuggester</str>
+      <str name="name">suggest</str>
       <str name="lookupImpl">AnalyzingInfixLookupFactory</str>
       <str name="dictionaryImpl">DocumentDictionaryFactory</str>
       <str name="field">suggester_mt</str>
@@ -1627,13 +1627,22 @@
       <str name="suggestAnalyzerFieldType">text_suggest</str>
       <str name="buildOnCommit">true</str>
     </lst>
+    <lst name="suggester">
+      <str name="name">suggest_all_mods</str>
+      <str name="lookupImpl">AnalyzingInfixLookupFactory</str>
+      <str name="dictionaryImpl">DocumentDictionaryFactory</str>
+      <str name="field">suggester_all_mods</str>
+      <str name="weightField">suggest_weight</str>
+      <str name="suggestAnalyzerFieldType">text_suggest</str>
+      <str name="indexPath">path-of-system-dir/suggest_all_mods</str>
+      <str name="buildOnCommit">true</str>
+    </lst>
   </searchComponent>
-
+ 
   <requestHandler class="solr.SearchHandler" name="/suggest">
     <lst name="defaults">
       <str name="suggest">true</str>
       <str name="suggest.count">1000</str>
-      <str name="suggest.dictionary">analyzingInfixSuggester</str>
     </lst>
     <arr name="components">
       <str>suggest</str>
