@@ -1619,22 +1619,12 @@
 
   <searchComponent class="solr.SuggestComponent" name="suggest">
     <lst name="suggester">
-      <str name="name">suggest</str>
-      <str name="lookupImpl">AnalyzingInfixLookupFactory</str>
-      <str name="dictionaryImpl">DocumentDictionaryFactory</str>
-      <str name="field">suggester_mt</str>
-      <str name="weightField">suggest_weight</str>
-      <str name="suggestAnalyzerFieldType">text_suggest</str>
-      <str name="buildOnCommit">true</str>
-    </lst>
-    <lst name="suggester">
       <str name="name">suggest_all_mods</str>
       <str name="lookupImpl">AnalyzingInfixLookupFactory</str>
       <str name="dictionaryImpl">DocumentDictionaryFactory</str>
       <str name="field">suggester_all_mods</str>
       <str name="weightField">suggest_weight</str>
       <str name="suggestAnalyzerFieldType">text_suggest</str>
-      <str name="indexPath">path-of-system-dir/suggest_all_mods</str>
       <str name="buildOnCommit">true</str>
     </lst>
   </searchComponent>
