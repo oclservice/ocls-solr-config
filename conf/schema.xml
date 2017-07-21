@@ -307,8 +307,7 @@
    <!-- catchall field, containing all other searchable text fields (implemented
         via copyField further on in this schema  -->
    <field name="catch_all_fields_mt" type="text" indexed="true" stored="false" multiValued="true"/>
-   <field name="suggester_mt" type="text_suggest" indexed="true" stored="true" multiValued="true"/>
-   <field name="suggester_all_mods_mt" type="text_suggest" indexed="true" stored="true" multiValued="true"/>
+   <field name="suggester_all_mods_ts" type="text_suggest" indexed="true" stored="true" multiValued="true"/>
 
    <!-- Here, default is used to create a "timestamp" field indicating
         When each document was indexed.
@@ -386,8 +385,8 @@
 
 <!-- The following line is a bit of a performance hog, I would look to remove it if the indexing takes a long time. -->
 <copyField source="*" dest="catch_all_fields_mt"/>
-<copyField source="mods_*" dest="suggester_all_mods"/>
- 
+<copyField source="mods_*" dest="suggester_all_mods_ts"/>
+
 <!-- Similarity is the scoring routine for each document vs. a query.
       A custom similarity may be specified here, but the default is fine
       for most applications.  -->
