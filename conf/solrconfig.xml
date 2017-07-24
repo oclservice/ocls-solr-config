@@ -1622,7 +1622,7 @@
       <str name="name">suggest_all_mods</str>
       <str name="lookupImpl">AnalyzingInfixLookupFactory</str>
       <str name="dictionaryImpl">DocumentDictionaryFactory</str>
-      <str name="field">suggester_all_mods</str>
+      <str name="field">suggester_all_mods_ts</str>
       <str name="weightField">suggest_weight</str>
       <str name="suggestAnalyzerFieldType">text_suggest</str>
       <str name="buildOnCommit">true</str>
