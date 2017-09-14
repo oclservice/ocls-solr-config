@@ -19,10 +19,13 @@
   </xsl:template>
 
   <xsl:template match="mods:mods/mods:titleInfo/mods:title |
-    mods:mods/mods:name/mods:namePart | mods:mods/mods:subject/mods:topic |
+    mods:mods/mods:name/mods:namePart |
+    mods:mods/mods:subject/mods:topic |
+    mods:mods/mods:subject/mods:geographic |
     mods:mods/mods:subject/mods:name/mods:namePart |
     mods:mods/mods:originInfo/mods:place/mods:placeTerm |
-    mods:mods/mods:originInfo/mods:publisher | mods:mods/mods:genre |
+    mods:mods/mods:originInfo/mods:publisher |
+    mods:mods/mods:genre |
     mods:mods/mods:location/mods:physicalLocation" mode="ocls_mods_suggester">
     <xsl:variable name="text_value" select="normalize-space(.)"/>
     <xsl:if test="$text_value">
