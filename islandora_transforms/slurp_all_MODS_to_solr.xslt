@@ -11,6 +11,7 @@
   <xsl:include href="/usr/local/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/library/xslt-date-template.xslt"/>
   <!-- <xsl:include href="/usr/local/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/config/index/FgsIndex/islandora_transforms/manuscript_finding_aid.xslt"/> -->
   <xsl:include href="/usr/local/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/manuscript_finding_aid.xslt"/>
+  <xsl:include href="/usr/local/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/ocls_mods_slurp.xslt"/>
   <!-- HashSet to track single-valued fields. -->
   <xsl:variable name="single_valued_hashset" select="java:java.util.HashSet.new()"/>
 
@@ -28,6 +29,8 @@
       <xsl:with-param name="pid" select="../../@PID"/>
       <xsl:with-param name="datastream" select="../@ID"/>
     </xsl:apply-templates>
+
+    <xsl:apply-templates mode="ocls_mods_slurp" select="$content//mods:mods[1]"/>
   </xsl:template>
 
   <!-- Handle dates. -->
@@ -62,43 +65,46 @@
     <!-- Prevent multiple generating multiple instances of single-valued fields
          by tracking things in a HashSet -->
     <xsl:variable name="field_name" select="normalize-space(concat($this_prefix, local-name()))"/>
-    <!-- The method java.util.HashSet.add will return false when the value is
-         already in the set. -->
-    <xsl:if test="java:add($single_valued_hashset, $field_name)">
-      <xsl:if test="not(normalize-space($textValue)='')">
-        <field>
-          <xsl:attribute name="name">
-            <xsl:value-of select="concat($field_name, '_dt')"/>
-          </xsl:attribute>
-          <xsl:value-of select="$textValue"/>
-        </field>
-      </xsl:if>
-      <xsl:if test="not(normalize-space($rawTextValue)='')">
-        <field>
-          <xsl:attribute name="name">
-            <xsl:value-of select="concat($field_name, '_s')"/>
-          </xsl:attribute>
-          <xsl:value-of select="$rawTextValue"/>
-        </field>
-      </xsl:if>
-    </xsl:if>
-
-    <xsl:if test="not(normalize-space($textValue)='')">
-      <field>
-        <xsl:attribute name="name">
-          <xsl:value-of select="concat($prefix, local-name(), '_mdt')"/>
-        </xsl:attribute>
-        <xsl:value-of select="$textValue"/>
-      </field>
-    </xsl:if>
-    <xsl:if test="not(normalize-space($rawTextValue)='')">
-      <field>
-        <xsl:attribute name="name">
-          <xsl:value-of select="concat($prefix, local-name(), '_ms')"/>
-        </xsl:attribute>
-        <xsl:value-of select="$rawTextValue"/>
-      </field>
-    </xsl:if>
+    <xsl:choose>
+      <!-- The method java.util.HashSet.add will return false when the value is
+           already in the set. -->
+      <xsl:when test="java:add($single_valued_hashset, $field_name)">
+        <xsl:if test="not(normalize-space($textValue)='')">
+          <field>
+            <xsl:attribute name="name">
+              <xsl:value-of select="concat($field_name, '_dt')"/>
+            </xsl:attribute>
+            <xsl:value-of select="$textValue"/>
+          </field>
+        </xsl:if>
+        <xsl:if test="not(normalize-space($rawTextValue)='')">
+          <field>
+            <xsl:attribute name="name">
+              <xsl:value-of select="concat($field_name, '_s')"/>
+            </xsl:attribute>
+            <xsl:value-of select="$rawTextValue"/>
+          </field>
+        </xsl:if>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:if test="not(normalize-space($textValue)='')">
+          <field>
+            <xsl:attribute name="name">
+              <xsl:value-of select="concat($prefix, local-name(), '_mdt')"/>
+            </xsl:attribute>
+            <xsl:value-of select="$textValue"/>
+          </field>
+        </xsl:if>
+        <xsl:if test="not(normalize-space($rawTextValue)='')">
+          <field>
+            <xsl:attribute name="name">
+              <xsl:value-of select="concat($prefix, local-name(), '_ms')"/>
+            </xsl:attribute>
+            <xsl:value-of select="$rawTextValue"/>
+          </field>
+        </xsl:if>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <!-- Avoid using text alone. -->
