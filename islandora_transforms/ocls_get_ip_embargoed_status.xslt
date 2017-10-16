@@ -23,14 +23,9 @@
       </xsl:choose>
     </xsl:variable>
 
-    <!-- Get the IP embargoed status document. -->
-    <xsl:variable name="ip_embargoed_doc">
-      <xsl:copy-of select="document(concat($url, '/ip_embargoed/', $pid))"/>
-    </xsl:variable>
-
     <!-- Make a cool field. -->
     <field name="ocls_ip_embargoed_b">
-      <xsl:value-of select="$ip_embargoed_doc/embargo_info/embargo_status"/>
+      <xsl:value-of select="document(concat($url, '/ip_embargoed/', $pid))/embargo_info/embargo_status"/>
     </field>
 
   </xsl:template>
