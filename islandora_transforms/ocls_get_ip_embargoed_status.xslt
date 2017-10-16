@@ -28,7 +28,10 @@
       <xsl:copy-of select="document(concat($url, '/ip_embargoed/', $pid))"/>
     </xsl:variable>
 
-    <xsl:value-of select="$ip_embargoed_doc/embargo_info/embargo_status"/>
+    <!-- Make a cool field. -->
+    <field name="ocls_ip_embargoed_b">
+      <xsl:value-of select="$ip_embargoed_doc/embargo_info/embargo_status"/>
+    </field>
 
   </xsl:template>
 </xsl:stylesheet>

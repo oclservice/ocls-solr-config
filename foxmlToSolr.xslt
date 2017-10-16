@@ -258,11 +258,9 @@
       </xsl:for-each>
 
       <!-- IP embargoed status. -->
-      <field name="ocls_ip_embargoed_b">
-        <xsl:call-template name="ocls_get_ip_embargoed_status">
-          <xsl:with-param name="pid" select="$PID"/>
-        </xsl:call-template>
-      </field>
+      <xsl:call-template name="ocls_get_ip_embargoed_status">
+        <xsl:with-param name="pid" select="$PID"/>
+      </xsl:call-template>
 
       <!-- this is an example of using template modes to have multiple ways of indexing the same stream -->
       <!--
