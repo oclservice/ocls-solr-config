@@ -22,6 +22,7 @@
         <xsl:when test="$namespace='georgian'">Georgian College</xsl:when>
         <xsl:when test="$namespace='loyalist'">Loyalist Library</xsl:when>
         <xsl:when test="$namespace='seneca'">Seneca Libraries</xsl:when>
+        <xsl:when test="$namespace='niagara'">Niagara College</xsl:when>
       </xsl:choose>
     </xsl:variable>
 
