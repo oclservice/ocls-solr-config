@@ -51,7 +51,7 @@
   <!-- Name -->
   <xsl:template match="mods:mods/mods:name[@type = 'personal' or @type = 'corporate' or @type = 'conference']" mode="ocls_mods_slurp">
     <xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ- '" />
-    <xsl:variable name="lowercase" select="'abcdefghijklmnopqrstuvwxyz'" />
+    <xsl:variable name="lowercase" select="'abcdefghijklmnopqrstuvwxyz__'" />
     <xsl:variable name="name_type" select="@type" />
     <xsl:variable name="role_term" select="translate(mods:role/mods:roleTerm/text(), $uppercase, $lowercase)" />
     <xsl:variable name="name">
@@ -78,7 +78,7 @@
   </xsl:template>
 
   <!-- Creator & Contributors -->
-  <xsl:template match="mods:mods/mods:name[@type = 'personal'][mods:role/mods:roleTerm[. = 'Creator' or . = 'Contributor']]" mode="ocls_mods_slurp">
+  <xsl:template match="mods:mods/mods:name[@type = 'personal'][mods:role/mods:roleTerm[. = 'Creator' or . = 'Contributor']]" mode="ocls_mods_creator_contributor_slurp">
     <xsl:variable name="name_type" select="@type" />
     <xsl:variable name="name">
       <xsl:for-each select="mods:namePart[not(@type)]">
