@@ -12,7 +12,7 @@
     <xsl:variable name="content">
       <xsl:if test="mods:nonSort">
         <xsl:value-of select="normalize-space(mods:nonSort/text())"/>
-        <xsl:text>, </xsl:text>
+        <xsl:text> </xsl:text>
       </xsl:if>
       <xsl:value-of select="normalize-space(mods:title/text())"/>
       <xsl:if test="mods:subTitle">
