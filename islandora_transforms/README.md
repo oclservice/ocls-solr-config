@@ -1,4 +1,10 @@
-# Islandora Transforms
+# CORe Islandora Transforms
+
+## OCLS-specific information
+
+Note that for CORe, this repository is now a subdirectory of the [ocls-solr-config](https://github.com/oclservice/ocls-solr-config) repository. It's fine to commit changes to this repository when working on the transforms, but be sure to copy changes over to the `islandora_transforms` directory in [ocls-solr-config](https://github.com/oclservice/ocls-solr-config) when work is done, to avoid code drift. 
+
+See [How Solr config files are maintained for CORe](https://github.com/oclservice/CORe-Admin/blob/master/solr.md#how-solr-config-files-are-maintained-for-core) for details.
 
 ## Introduction
 
