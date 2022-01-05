@@ -29,7 +29,10 @@
     </xsl:apply-templates>
 
     <xsl:apply-templates mode="ocls_mods_slurp" select="$content//mods:mods[1]"/>
+    <xsl:apply-templates mode="ocls_mods_all_authors_slurp" select="$content//mods:mods[1]/mods:name"/>
     <xsl:apply-templates mode="ocls_mods_creator_contributor_slurp" select="$content//mods:mods[1]/mods:name"/>
+    <xsl:apply-templates mode="ocls_mods_author_display_slurp" select="$content//mods:mods[1]/mods:name"/>
+    <xsl:apply-templates mode="ocls_mods_date_display_slurp" select="$content//mods:mods[1]/mods:originInfo"/>
   </xsl:template>
 
   <!-- Handle dates. -->
